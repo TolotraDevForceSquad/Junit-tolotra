@@ -5,27 +5,34 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class MoneyTest {
-    private Money m12CHF;
-    private Money m14CHF;
+    private Money f12CHF;
+    private Money f7USD;
 
     @Before
     public void setUp() {
-        m12CHF = new Money(12, "CHF");
-        m14CHF = new Money(14, "CHF");
+        f12CHF = new Money(12, "CHF");
+        f7USD = new Money(7, "USD");
     }
 
     @Test
     public void testSimpleAdd() {
-        Money expected = new Money(26, "CHF");
-        Money result = m12CHF.add(m14CHF);
-        assertTrue(expected.equals(result));
+        Money expected = new Money(19, "CHF");
+        IMoney result = f12CHF.add(new Money(7, "CHF"));
+        assertEquals(expected, result);
     }
 
     @Test
     public void testEquals() {
-        assertTrue(!m12CHF.equals(null));
-        assertEquals(m12CHF, m12CHF);
-        assertEquals(m12CHF, new Money(12, "CHF"));
-        assertTrue(!m12CHF.equals(m14CHF));
+        assertTrue(!f12CHF.equals(null));
+        assertEquals(f12CHF, f12CHF);
+        assertEquals(f12CHF, new Money(12, "CHF"));
+        assertTrue(!f12CHF.equals(f7USD));
+    }
+
+    @Test
+    public void testMixedSimpleAdd() {
+        Money bag[] = { f12CHF, f7USD };
+        MoneyBag expected = new MoneyBag(bag);
+        assertEquals(expected, f12CHF.add(f7USD));
     }
 }
