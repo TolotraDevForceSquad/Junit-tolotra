@@ -18,8 +18,10 @@ public class Money {
 	}
 	
 	public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
+        if (this == obj) 
+        	return true;
+        if (obj == null || getClass() != obj.getClass()) 
+        	return false;
         Money money = (Money) obj;
         return fAmount == money.fAmount && fCurrency.equals(money.fCurrency);
     }
